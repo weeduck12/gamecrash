@@ -1,4 +1,3 @@
 # gamecrash
-<<<<<<< HEAD
-crash test  
+Salut c'est le readme crashtest   
 =======
