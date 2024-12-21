@@ -1,2 +1,4 @@
 # gamecrash
+<<<<<<< HEAD
 crash test  
+=======
