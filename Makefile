@@ -4,16 +4,21 @@
 #FLAGS = choix de flags
 #CC = choix de la compilation
 #${NAME} pour  l'appeler dans le code
-# % pour cibler tous les .o et .c la suite jsp 
+# <dependance> : <source>
+# 			<commande>
+# % cible tous les .o et .c 
 # %.o: %.c
-#       ${CC} ${CFLAGS} -c $< -o $@
+#       ${CC} ${FLAGS} -c $< -o $@
+# on peut SRCS = $(wildcard *.c) (recupere *.c)
+# on peut aussi $(SRCS:.c=.o) (transforme .c -> .o)
 ###############################
 NAME = launch
-CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
+FLAGS = -Wall -Wextra -Werror
+CFLAGS = -g $(shell sdl2-config --cflags)
 LDFLAGS = $(shell sdl2-config --libs)
 CC = gcc
-SRCS = main.c
-OBJS = main.o
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
 all : ${NAME}
 
@@ -22,7 +27,7 @@ ${NAME} : ${OBJS}
 
 
 %.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+	${CC} ${FLAGS} ${CFLAGS} -c $< -o $@
 
 clean:
 	rm -f ${OBJS} ${NAME}
