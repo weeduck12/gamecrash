@@ -11,15 +11,17 @@
 NAME = launch
 FLAGS = -Wall -Wextra -Werror
 CC = gcc
+SRCS = main.c
+OBJS = main.o
 
 all : ${NAME}
 
-${NAME} : main.o 
-	${CC} main.o -o ${NAME} 
+${NAME} : ${SRCS} 
+	${CC} -o ${NAME} ${OBJS}
 
 
 %.o: %.c
-	${CC} ${CFLAGS} -c main.c -o main.o
+	${CC} ${CFLAGS} -c ${SRCS} -o ${OBJS}
 
 clean:
-	rm -rf *.o
+	rm -f ${OBJS} ${NAME}
