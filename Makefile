@@ -4,7 +4,7 @@
 #FLAGS = choix de flags
 #CC = choix de la compilation
 #${NAME} pour  l'appeler dans le code
-# <dependance> : <source>
+# <cible> : <dependance>
 # 			<commande>
 # % cible tous les .o et .c 
 # %.o: %.c
