@@ -9,19 +9,20 @@
 #       ${CC} ${CFLAGS} -c $< -o $@
 ###############################
 NAME = launch
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g $(shell sdl2-config --cflags)
+LDFLAGS = $(shell sdl2-config --libs)
 CC = gcc
 SRCS = main.c
 OBJS = main.o
 
 all : ${NAME}
 
-${NAME} : ${SRCS} 
-	${CC} -o ${NAME} ${OBJS}
+${NAME} : ${OBJS} 
+	${CC} -o ${NAME} ${OBJS} ${LDFLAGS}
 
 
 %.o: %.c
-	${CC} ${CFLAGS} -c ${SRCS} -o ${OBJS}
+	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	rm -f ${OBJS} ${NAME}
