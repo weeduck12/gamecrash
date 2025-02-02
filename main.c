@@ -24,7 +24,10 @@ int main()
 	SDL_Renderer* rendu = SDL_CreateRenderer(fenetre,-1,SDL_RENDERER_ACCELERATED);
 	SDL_Surface* surface = IMG_Load("plateau.png");
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(rendu, surface);
+	SDL_Surface* pions = IMG_Load("pions.png");
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(rendu, pions);
 	SDL_FreeSurface(surface);
+	SDL_FreeSurface(pions);
 //DECLARATIONS 
 	SDL_Event event;
 //LOOP
