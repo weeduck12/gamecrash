@@ -31,7 +31,7 @@ int main()
 //DECLARATIONS 
 	SDL_Event event;
 	SDL_Rect pion = {1500, 450, 200, 300};
-	SDL_Rect place_pion = {10, 750,200 ,300};
+	SDL_Rect place_pion = {50, 875,140 ,140};
 //LOOP
 	bool run = true;
 	while(run){
