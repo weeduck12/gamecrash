@@ -1,26 +1,53 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
-
+#include <stdbool.h>
+#include <SDL2/SDL_image.h>
 int main()
 {
+//INITIALISATION DE LA VIDEO 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("ERREUR SDL : %s\n",SDL_GetError());
 		return 1;
 	}
-	printf("Initialisation réalisée avec succès\n");
+	printf("Le programme s'est lancé sans problème\n");
+//INIT IMG
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) 
+	{
+        printf("Erreur IMG_Init: %s\n", IMG_GetError());
+        SDL_Quit();
+        return 1;
+        }
+//CREATION DE LA FENETRE & RENDU & SURFACE 
 	SDL_Window* fenetre = NULL;
 	fenetre = SDL_CreateWindow("Fenetre GAMECRASH",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,SDL_WINDOW_SHOWN);
-
-	if(fenetre)
+	SDL_Renderer* rendu = SDL_CreateRenderer(fenetre,-1,SDL_RENDERER_ACCELERATED);
+	SDL_Surface* surface = IMG_Load("plateau.png");
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(rendu, surface);
+	SDL_FreeSurface(surface);
+//DECLARATIONS 
+	SDL_Event event;
+//LOOP
+	bool run = true;
+	while(run){
+		while(SDL_PollEvent(&event)){
+	if(event.type == SDL_QUIT)
 	{
-		SDL_Delay(3000);
-		SDL_DestroyWindow(fenetre);
+		run = false;
 	}
-	else
-	{
-		fprintf(stderr,"Erreur de creation de la fenetre : %s\n",SDL_GetError());
+		}
+	//RENDU
+	SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
+        SDL_RenderClear(rendu);
+        SDL_RenderCopy(rendu, texture, NULL, NULL);
+        SDL_RenderPresent(rendu);
+	//
 	}
+	//FERMETURE
+	SDL_DestroyTexture(texture);
+	SDL_DestroyRenderer(rendu);
+	SDL_DestroyWindow(fenetre);
 	SDL_Quit();
 	return 0;
+	//
 }

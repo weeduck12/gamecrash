@@ -15,7 +15,7 @@
 NAME = launch
 FLAGS = -Wall -Wextra -Werror
 CFLAGS = -g $(shell sdl2-config --cflags)
-LDFLAGS = $(shell sdl2-config --libs)
+LDFLAGS = $(shell sdl2-config --libs) -lSDL2_image
 CC = gcc
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
